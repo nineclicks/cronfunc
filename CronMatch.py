@@ -2,7 +2,7 @@ from datetime import datetime
 import re
 
 # Full cron pattern
-_REG_CRON_FULL = r'^\s*([0-9,-\/\*]*)\s+([0-9,-\/\*]*)\s+([0-9,-\/\*]*)\s+([0-9,-\/\*]*)\s+([0-9,-\/\*]*)(?:\s*$|\s+(.*?)$)'
+_REG_CRON_FULL = r'^\s*([0-9,-\/\*]+)\s+([0-9,-\/\*]+)\s+([0-9,-\/\*]+)\s+([0-9,-\/\*]+)\s+([0-9,-\/\*]+)(?:\s*$|\s+(.*?)$)'
 
 # Segment pattern x-y/z
 _REG_CRON_SEG = r'^(\d+|\*)(?:(?<!\*)-(\d+))?(?:\/(\d+))?$'
