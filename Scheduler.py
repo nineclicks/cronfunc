@@ -71,20 +71,6 @@ class Scheduler:
             self._last_tick = self._trim_datetime()
 
             self._check_cron()
+
         self._running = False
         self._exit = None
-
-def myFn(s):
-    print('doing the thing: ' + s)
-
-if __name__ == '__main__':
-    cron = '*/2 * * * * two'
-    cron += '\n* * * * * one'
-    cron += '\n*/3 * * * * three'
-    cron += '\n* * * * * ...'
-    s = Scheduler()
-    s.fn = myFn
-    s.load_cron(cron, myFn)
-
-    sleep(65)
-    s.stop()
