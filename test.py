@@ -2,27 +2,27 @@
 import unittest
 import json
 from datetime import datetime
-from CronMatch import CronMatch
+from CronMatch import cron_match
 
 class TestStringMethods(unittest.TestCase):
 
     def test_datetime_now(self):
         cron = '* * * * *'
-        self.assertTrue(CronMatch.cron_match(cron), 'Match datetime now')
+        self.assertTrue(cron_match(cron), 'Match datetime now')
 
     def test_value_error(self):
         cases = self.get_cases()['invalid_cases']
         for cron in cases:
             with self.subTest(cron=cron):
-                self.assertRaises(ValueError, CronMatch.cron_match, cron)
+                self.assertRaises(ValueError, cron_match, cron)
 
     def test_return_command(self):
         dt = datetime(2020,1,1,0,0,0)
         command = 'one two three'
         cron = '0 0 * * * {}'.format(command)
-        self.assertEqual(command, CronMatch.cron_match(cron, dt))
+        self.assertEqual(command, cron_match(cron, dt))
         cron = '0 1 * * * {}'.format(command)
-        self.assertFalse(CronMatch.cron_match(cron, dt))
+        self.assertFalse(cron_match(cron, dt))
 
     def get_cases(self):
         with open('cases.json') as fp:
@@ -41,12 +41,12 @@ class TestStringMethods(unittest.TestCase):
             for match in matches:
                 with self.subTest(cron=cron, match=match):
                     dt = datetime.strptime(match, dt_format)
-                    self.assertTrue(CronMatch.cron_match(cron, dt))
+                    self.assertTrue(cron_match(cron, dt))
 
             for no_match in nomatches:
                 with self.subTest(cron=cron, no_match=no_match):
                     dt = datetime.strptime(no_match, dt_format)
-                    self.assertFalse(CronMatch.cron_match(cron, dt))
+                    self.assertFalse(cron_match(cron, dt))
 
 if __name__ == '__main__':
     unittest.main()
